@@ -9,9 +9,6 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
                     app = docker.build("kskrisss/train-schedule_b")
@@ -22,9 +19,6 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            when {
-                branch 'master'
-            }
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'kskrisss_docker') {
@@ -35,9 +29,6 @@ pipeline {
             }
         }
         stage('DeployToProduction') {
-            when {
-                branch 'master'
-            }
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
