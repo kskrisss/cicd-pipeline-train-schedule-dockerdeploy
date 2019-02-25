@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("willbla/train-schedule")
+                    app = docker.build("kskrisss/train-schedule_b")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'kskrisss_docker') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
